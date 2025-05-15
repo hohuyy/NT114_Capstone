@@ -1,0 +1,30 @@
+{
+  "name": "Command and Control - Standard Application Layer Protocol",
+  "description": "Detects the use of standard application layer protocols like HTTP, HTTPS, or DNS for command and control communication.",
+  "risk_score": 90,
+  "severity": "high",
+  "type": "query",
+  "query": "(event.category: \"network\" and network.protocol: \"http\" and destination.ip: \"192.168.*.*\")",
+  "index": ["filebeat-*"],
+  "language": "kuery",
+  "tags": ["MITRE", "T1071", "Command and Control"],
+  "references": ["https://attack.mitre.org/techniques/T1071/"],
+  "threat": [
+    {
+      "framework": "MITRE ATT&CK",
+      "tactic": {
+        "id": "TA0011",
+        "name": "Command and Control",
+        "reference": "https://attack.mitre.org/tactics/TA0011/"
+      },
+      "technique": [
+        {
+          "id": "T1071",
+          "name": "Application Layer Protocol",
+          "reference": "https://attack.mitre.org/techniques/T1071/"
+        }
+      ]
+    }
+  ],
+  "enabled": true
+}

@@ -1,0 +1,21 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/*.log
+    - /var/log/auth.log*
+    - /var/log/syslog*
+    - /var/log/audit/audit.log*
+output.elasticsearch:
+  hosts: ["https://elk.local:9200"]  
+  username: "elastic"
+  password: "Z0X7NKlT7-k5aPmf8t6Y"
+  # ssl.certificate_authorities: ["/etc/filebeat/http_ca.crt"]
+  ssl.verification_mode: none     # Dùng ở môi trường test
+setup.kibana:
+  host: "http://elk.local:5601"
+  ssl.verification_mode: none
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false

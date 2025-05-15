@@ -1,0 +1,30 @@
+{
+  "name": "Possible Disable Security Tool (EDR, Antivirus)",
+  "description": "Detects attempts to disable or stop security tools such as firewalls or antivirus services.",
+  "risk_score": 90,
+  "severity": "high",
+  "type": "query",
+  "query": "(process.name: \"systemctl\" or process.name: \"service\") and (process.command_line: \"*disable*\" or process.command_line: \"*stop*\" or process.command_line: \"*kill*\") and (process.command_line: \"*firewalld*\" or process.command_line: \"*sshd*\" or process.command_line: \"*antivirus*\")",
+  "index": ["filebeat-*"],
+  "language": "kuery",
+  "tags": ["MITRE", "T1070.004", "Defense Evasion"],
+  "references": ["https://attack.mitre.org/techniques/T1070/004/"],
+  "threat": [
+    {
+      "framework": "MITRE ATT&CK",
+      "tactic": {
+        "id": "TA0005",
+        "name": "Defense Evasion",
+        "reference": "https://attack.mitre.org/tactics/TA0005/"
+      },
+      "technique": [
+        {
+          "id": "T1070.004",
+          "name": "Indicator Removal on Host: File and Directory Permissions Modification",
+          "reference": "https://attack.mitre.org/techniques/T1070/004/"
+        }
+      ]
+    }
+  ],
+  "enabled": true
+}

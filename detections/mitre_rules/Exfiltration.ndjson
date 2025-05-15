@@ -1,0 +1,30 @@
+{
+  "name": "Exfiltration Over Command and Control Channel",
+  "description": "Detects exfiltration of data over a command and control channel (e.g., HTTP, HTTPS, DNS).",
+  "risk_score": 90,
+  "severity": "high",
+  "type": "query",
+  "query": "(event.category: \"network\" and (network.protocol: \"http\" or network.protocol: \"https\" or network.protocol: \"dns\") and destination.ip: \"192.168.*.*\" and event.action: \"exfiltration\")",
+  "index": ["filebeat-*"],
+  "language": "kuery",
+  "tags": ["MITRE", "T1041", "Exfiltration"],
+  "references": ["https://attack.mitre.org/techniques/T1041/"],
+  "threat": [
+    {
+      "framework": "MITRE ATT&CK",
+      "tactic": {
+        "id": "TA0011",
+        "name": "Exfiltration",
+        "reference": "https://attack.mitre.org/tactics/TA0011/"
+      },
+      "technique": [
+        {
+          "id": "T1041",
+          "name": "Exfiltration Over Command and Control Channel",
+          "reference": "https://attack.mitre.org/techniques/T1041/"
+        }
+      ]
+    }
+  ],
+  "enabled": true
+}
